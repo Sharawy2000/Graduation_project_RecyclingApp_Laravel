@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reset_Password_Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\CheckLang;
 use Illuminate\Http\Request;
 use App\Models\ResetCodePassword;
 use App\Models\User;
@@ -15,6 +16,7 @@ class ResetPasswordController extends Controller
 
     function __construct(){
         $this->model=new User ;
+        $this->middleware(CheckLang::class);
     }
     public function forget_password(Request $request)
     {
@@ -35,7 +37,8 @@ class ResetPasswordController extends Controller
         // Send email to user
         Mail::to($data['email'])->send(new SendCodeResetPassword($codeData->code));
 
-        return response(['message' => trans('passwords.sent')], 201);
+//        return response(['message' => trans('passwords.sent')], 201);
+        return response_data("",__("auth.codeEmail"),201);
     }
 
     public function code_validate(Request $request)
@@ -50,13 +53,13 @@ class ResetPasswordController extends Controller
         // check if it does not expired: the time is one hour
         if ($passwordReset->created_at > now()->addHour()) {
             $passwordReset->delete();
-            return response(['message' => trans('passwords.code_is_expire')], 422);
+//            return response(['message' => trans('passwords.code_is_expire')], 422);
+            return response_data("",__("auth.codeExpire"),422);
+
         }
 
-        return response([
-//            'code' => $passwordReset->code,
-            'message' => trans('passwords.code_is_valid')
-        ], 200);
+        return response_data("",__("auth.codeValid"));
+
     }
     public function reset_password(Request $request)
     {
@@ -78,7 +81,8 @@ class ResetPasswordController extends Controller
         // check if it does not expired: the time is one hour
         if ($passwordReset->created_at > now()->addHour()) {
             $passwordReset->delete();
-            return response(['message' => trans('passwords.code_is_expire')], 422);
+            return response_data("",__("auth.codeExpire"),422);
+
         }
 
         // find user's email
@@ -91,7 +95,7 @@ class ResetPasswordController extends Controller
         // delete current code
         $passwordReset->delete();
 
-        return response(['message' =>'password has been successfully reset'], 200);
+        return response_data("",__("auth.changePassword"));
     }
 
 }

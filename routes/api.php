@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{UserController,AdminController,PostController};
-use App\Http\Controllers\Reset_Password_Api\{CodeCheckController,ForgotPasswordController,ResetPasswordController};
+use App\Http\Controllers\Reset_Password_Api\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,9 @@ use App\Http\Controllers\Reset_Password_Api\{CodeCheckController,ForgotPasswordC
 // localization instead of lang lib
 
 //Route::resource('posts','PostController');
-
+//Route::resource('posts', PostController::class)->only([
+//    'index', 'waiting_list' ,'show','store','delete','update','update_admin','search'
+//]);
 Route::group([
     'prefix'=>'posts',
     'controller'=>PostController::class
@@ -54,7 +56,7 @@ Route::group([
 
 
 Route::group([
-    'prefix'=> "auth/"
+    'prefix'=> "auth/",
 ],function (){
 
     Route::group([
@@ -67,7 +69,6 @@ Route::group([
         Route::post('/refresh', 'refresh');
         Route::put('/{id}/edit', 'update');
         Route::get('/{token}', 'verify_email');
-
         Route::post('/user-profile', 'userProfile');
 
     });

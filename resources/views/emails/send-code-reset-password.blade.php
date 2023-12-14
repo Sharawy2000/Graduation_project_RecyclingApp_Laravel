@@ -1,10 +1,10 @@
 {{-- @component('mail::message') --}}
-<h1>We have received your request to reset your account password</h1>
-<p>You can use the following code to recover your account</p>
+<h1>{{__("auth.msgResetBlade_1")}}</h1>
+<p>{{__("auth.msgResetBlade_2")}}</p>
 <br>
 {{-- @component('mail::panel') --}}
-<p>Your reset code : {{ $code }} </p>
+<p>{{__("auth.msgResetBlade_4")}} : {{ $code }} </p>
 {{-- @endcomponent --}}
 
-<p>The allowed duration of the code is one hour from the time the message was sent</p>
+<p>{{__("auth.msgResetBlade_3")}}</p>
 {{-- @endcomponent --}}

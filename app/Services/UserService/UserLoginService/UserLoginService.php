@@ -18,7 +18,8 @@ class UserLoginService{
         $validator=Validator::make($request->all(),$request->rules());
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response_data("",$validator->errors(),422);
+
         }
 
         return $validator;
@@ -40,27 +41,27 @@ class UserLoginService{
         return $verified;
     }
     protected function createNewToken($token){
-        return response()->json([
-            "message"=>"Logged in",
-            "data"=>[
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60,
-                'user' => auth()->user()
-            ]
 
-        ]);
+        return response_data(data: ['access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()],
+            message: __('auth.successLogin'));
     }
 
     function Login($request) {
+
         $data=$this->Validation($request);
 
         if (! $token = auth()->attempt($data->validated())) {
-            return response()->json(['error' => 'Email or password might be wrong'], 401);
+
+            return response_data("",__('auth.failed'),401);
+
         }
 
         if($this->getStatus($request->email)==0){
-            return response()->json(["message"=>"Your account is pending"],422);
+//            return response()->json(["message"=>"Your account is pending"],422);
+            return response_data("",__('auth.pending'),422);
         };
 
         // return response()->json(["message"=>$this->getStatus($request->email)],422);

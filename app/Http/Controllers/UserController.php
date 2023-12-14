@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Middleware\CheckLang;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\UserService\UserLoginService\UserLoginService;
 use App\Services\UserService\UserRegisterService\UserRegisterService;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -17,6 +19,7 @@ class UserController extends Controller
      */
     public function __construct() {
         $this->middleware('auth:user', ['except' => ['login', 'register','verify_email']]);
+        $this->middleware(CheckLang::class);
     }
     /**
      * Get a JWT via given credentials.
@@ -26,7 +29,6 @@ class UserController extends Controller
     public function login(LoginRequest $request){
 
         return(new UserLoginService())->Login($request);
-
 
     }
     /**
@@ -49,19 +51,20 @@ class UserController extends Controller
 
         $user = User::where('verificationToken', $token)->update(['status' => 1, 'email_verified_at' => now()]);
         if ($user == null) {
-            return response()->json([
-                'message'=>'Invalid verification :('
-            ],422);
+
+            return response_data("",__('auth.notVerified'),422);
+
         }
-        return response()->json([
-            "message" => 'Email successfully verified :D ',
-        ]);
+
+        return response_data("",__('auth.verified'));
+
 
     }
 
     public function logout() {
         auth()->logout();
-        return response()->json(['message' => 'User successfully signed out']);
+//        return response()->json(['message' => 'User successfully signed out']);
+        return response_data("None",__('auth.logout'));
     }
     /**
      * Refresh a token.
@@ -77,17 +80,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        return response()->json(auth()->user());
+        return response_data(auth()->user(),"");
+
     }
     public function update(Request $request,$id) {
+        $validator=Validator::make($request->all(),[
+            'name'=>'required|max:50',
+            "phone_number"=>'required|min:11|max:11|unique:users'
+            ]);
 
-        $user=User::where('id',$id)->update($request->only(['name','phone_number']));
+        if ($validator->fails()) {
+            return response_data("",$validator->errors(),422);
+        }
+
+//        return $validator;
+        User::where('id',$id)->update($request->only(['name','phone_number']));
         $user=User::where('id',$id)->find($id);
 
-        return response()->json([
-            "message"=>"User updated successfully",
-            "post"=>$user
-        ]);
+        return response_data($user,__('auth.update'));
+
     }
     /**
      * Get the token array structure.
@@ -98,11 +109,13 @@ class UserController extends Controller
      */
 
     protected function createNewToken($token){
-        return response()->json([
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60,
-        ]);
+
+        return response_data([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+        ],'');
+
     }
 
 }

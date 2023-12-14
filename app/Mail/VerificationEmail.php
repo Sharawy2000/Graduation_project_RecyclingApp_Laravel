@@ -42,7 +42,7 @@ class VerificationEmail extends Mailable
             with: [
                 'name'=>$this->user[0]->name,
                 // Use frontend APP URL in android studio in final but now we use our URL
-                'link'=>env('APP_URL')."/api/auth/user/". $this->user[0]->verificationToken,
+                'link'=>env('APP_URL')."/auth/user/". $this->user[0]->verificationToken,
             ]
         );
     }

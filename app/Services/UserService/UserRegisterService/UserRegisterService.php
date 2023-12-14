@@ -21,7 +21,7 @@ class UserRegisterService{
 
         $validator=Validator::make($request->all(),$request->rules());
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response_data("",$validator->errors(),422);
         }
         return $validator;
     }
@@ -59,11 +59,9 @@ class UserRegisterService{
 
             DB::commit();
 
-            return response()->json(
-                ["message"=>"Account has been created check you E-mail :D"]);
+            return response_data("",__("auth.created"));
 
         } catch (Exception $e) {
-//            return $e->getMessage();
             DB::rollBack();
         }
 
