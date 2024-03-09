@@ -31,5 +31,16 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id'     => '584504173047-qhad3gbsqgmmrmidl54nd76f6e2vbhj4.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect'      => 'http://127.0.0.1:8000/login/google/callback',
+    ],
+
+    'facebook' => [
+        'client_id'     => '690581659882777',
+        'client_secret' => '04e1041f6738b287837bd9f6b4c264d3',
+        'redirect'      => 'https://alshaerawy.aait-sa.com/login/facebook/callback',
+    ],
 
 ];

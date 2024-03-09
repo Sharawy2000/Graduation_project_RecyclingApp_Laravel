@@ -17,14 +17,22 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        // 'gender',
-        // 'image',
+        'TIN',
+        'organization',
+        'address',
+        'image',
         'user_type',
-        // 'location',
+        'location',
         'password',
         'phone_number',
         'email_verified_at',
         'verificationToken',
+        'social_id',
+        'social_type',
+        'governorate',
+        'city',
+        'street',
+        'residential_quarter',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -59,5 +67,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims() {
         return [];
+    }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
     }
 }

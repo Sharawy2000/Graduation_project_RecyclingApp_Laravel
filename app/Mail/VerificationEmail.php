@@ -40,9 +40,10 @@ class VerificationEmail extends Mailable
         return new Content(
             view: 'emails.mail',
             with: [
-                'name'=>$this->user[0]->name,
+                'name'=>$this->user->name,
                 // Use frontend APP URL in android studio in final but now we use our URL
-                'link'=>env('APP_URL')."/auth/user/". $this->user[0]->verificationToken,
+                'link'=>env('APP_URL')."/api/auth/user/". $this->user->verificationToken,
+
             ]
         );
     }

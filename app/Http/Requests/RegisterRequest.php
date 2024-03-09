@@ -24,14 +24,11 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
-            // 'email' => 'required|string|email|max:100',
-            // 'gender' => 'required|string',
             // "image"=>"required|image|mimes:jpg,png,jpeg,gif,svg|max:2048",
             'user_type' => 'required|string',
             // 'location' => 'required|string',
             'password' => 'required|string|confirmed|min:6',
-            // 'phone_number' => 'required|string|min:11|max:11|unique:users',
-            'phone_number' => 'required|string',
+            'phone_number' => 'required|string|min:11|max:11',
         ];
     }
 }

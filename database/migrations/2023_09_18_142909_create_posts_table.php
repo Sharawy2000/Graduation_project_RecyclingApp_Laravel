@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('name');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('material');
+            $table->string('quantity');
             $table->decimal('price');
-            $table->longText('content');
+            $table->longText('description');
             $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->longText('reject_reason')->nullable();
-//            $table->string('image');
+            $table->string('image');
             $table->timestamps();
         });
     }

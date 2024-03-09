@@ -33,7 +33,7 @@ return [
     'msgResetBlade_4'=>'Your reset code',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'verifiedBlade_1'=>"The account has been verified",
-    'verifiedBlade_2'=>"Please close this page and go to the login page",
+    'verifiedBlade_1'=>"Your account has been verified",
+    'verifiedBlade_2'=>"Please close this page",
 
 ];

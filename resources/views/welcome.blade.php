@@ -236,11 +236,11 @@
         <p>
           Join us in the exciting world of programming and turn your ideas into
           reality. Unlock the world of endless possibilities - learn to code and
-          shape the digital future with us.
+          shape the digital future with <us class=""></us>
         </p>
         <div class="buttons">
-          <a href="#" class="join">Join Now</a>
-          <a href="#" class="learn">Learn More</a>
+          <a href="{{url('/login/google')}}" class="join">Login with Google</a>
+          <a href="{{url('https://alshaerawy.aait-sa.com/login/facebook/callback')}}" class="learn">Login with Facebook</a>
         </div>
       </div>
       <div class="img">

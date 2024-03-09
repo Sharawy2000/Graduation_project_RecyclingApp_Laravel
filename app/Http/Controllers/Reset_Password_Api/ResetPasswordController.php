@@ -37,7 +37,6 @@ class ResetPasswordController extends Controller
         // Send email to user
         Mail::to($data['email'])->send(new SendCodeResetPassword($codeData->code));
 
-//        return response(['message' => trans('passwords.sent')], 201);
         return response_data("",__("auth.codeEmail"),201);
     }
 
@@ -53,7 +52,6 @@ class ResetPasswordController extends Controller
         // check if it does not expired: the time is one hour
         if ($passwordReset->created_at > now()->addHour()) {
             $passwordReset->delete();
-//            return response(['message' => trans('passwords.code_is_expire')], 422);
             return response_data("",__("auth.codeExpire"),422);
 
         }
@@ -64,19 +62,13 @@ class ResetPasswordController extends Controller
     public function reset_password(Request $request)
     {
 
-//      // add function
-//      // add link to verfiy code , email
-
         $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-
-
         // find the code
         $passwordReset = ResetCodePassword::firstWhere('email', $request->email);
-
 
         // check if it does not expired: the time is one hour
         if ($passwordReset->created_at > now()->addHour()) {

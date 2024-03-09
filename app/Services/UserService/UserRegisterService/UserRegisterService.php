@@ -28,7 +28,7 @@ class UserRegisterService{
 
     function GenerateToken($email){
         $token=substr(md5(rand(0,9). $email . time()),0,32);
-        $user=$this->model->where('email',$email)->get();
+        $user=$this->model::where('email',$email)->get();
         $user[0]->verificationToken=$token;
         $user[0]->save();
         return $user;
@@ -38,19 +38,19 @@ class UserRegisterService{
         $user = User::create(array_merge(
             $data->validated(),
             ['password' => bcrypt($request->password)
-            // 'image'=> $request->file('image')->store('users'),
             ]
         ));
         return $user->email;
     }
 
     function SendMail($user){
-        Mail::to($user[0]->email)->send(new VerificationEmail($user));
+        $user_info=$user[0];
+        Mail::to($user_info->email)->send(new VerificationEmail($user_info));
+//        dd($user_info->email);
     }
 
     function Register($request) {
         try {
-            //code...
             DB::beginTransaction();
             $data=$this->Validation($request);
             $email=$this->Store($data,$request);
