@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,6 +24,8 @@ class SocialController extends Controller
             $find_user = User::where('social_id', $user->id)->first();
 
             if($find_user){
+                User::where('social_type', ['Google','Facebook'])->update(['status' => 1, 'email_verified_at' => now()]);
+
                 response_data($find_user,'Logged in');
             } else{
                 $new_user=User::create([
@@ -30,6 +33,7 @@ class SocialController extends Controller
                     'email'=>$user->email,
                     'social_id'=>$user->id,
                     'social_type'=>'Facebook',
+                    'status'=>1,
                     'password'=>Hash::make('my_facebook')
                 ]);
                 $new_user['status']=1;
@@ -56,14 +60,18 @@ class SocialController extends Controller
 
             if($find_user){
 
+                User::where('social_type', ['Google','Facebook'])->update(['status' => 1, 'email_verified_at' => now()]);
+
                 return response_data($find_user,'Logged in');
 
-            } else{
+            } 
+            else{
                 $new_user=User::create([
                     'name'=>$user->name,
                     'email'=>$user->email,
                     'social_id'=>$user->id,
                     'social_type'=>'Google',
+                    'status'=>1,
                     'password'=>Hash::make('my_google')
                 ]);
 

@@ -44,20 +44,21 @@ class UserLoginService{
     }
 
     function Login($request) {
-
+        
         $data=$this->Validation($request);
 
         if (! $token = auth()->attempt($data->validated())) {
 
             return response_data("",__('auth.failed'),401);
-
         }
 
         if($this->getStatus($request->email)==0){
             return response_data("",__('auth.pending'),422);
         };
 
+
         return $this->createNewToken($token);
+        
     }
 
 

@@ -1,0 +1,106 @@
+.post {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-info {
+    display: flex;
+    align-items: center;
+}
+
+.post-details {
+    margin-left: 10px; /* Add space between image and details */
+}
+
+.post-title {
+    font-size: 24px;
+    margin: 0;
+}
+
+.post-content {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.post-author {
+    font-style: italic;
+    color: #888;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.accept-button, .reject-button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.accept-button:hover, .reject-button:hover {
+    background-color: #0056b3;
+}
+
+.post-image {
+    width: 40px; /* Adjust image width as needed */
+    height: 40px; /* Adjust image height as needed */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    border-radius: 5px; /* Add border-radius to make it square */
+    transition: transform 0.3s ease;
+}
+
+
+.post-image img {
+    /* width: 100%; Ensures the image fills the circular container */
+    height: auto;
+}
+
+
+.rejection-reason {
+    margin-top: 10px;
+}
+
+.rejection-reason label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.rejection-reason textarea, .rejection-reason input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+}
+.image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    height: auto; /* Allow the height to adjust based on the image */
+}
+
+.post-image {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover .post-image {
+    transform: scale(1.1); /* Increase the scale factor for zoom effect */
+    cursor: zoom-in;
+}

@@ -210,7 +210,7 @@
   <body>
     <header class="header">
       <nav class="navbar">
-        <h2 class="logo"><a href="https://alshaerawy.aait-sa.com"><i>{{__('main.project')}}</i></a></h2>
+        <h2 class="logo"><a href="{{env('APP_URL')}}"><i>{{__('main.project')}}</i></a></h2>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" id="hamburger-btn">
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -218,15 +218,15 @@
           </svg>
         </label>
         <ul class="links">
-          <li><a href="https://alshaerawy.aait-sa.com">Home</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="{{env('APP_URL')}}">Home</a></li>
+          <li><a href="{{env('APP_URL')}}/test">About Us</a></li>
           <li><a href="#">Services</a></li>
-          <li><a href="https://alshaerawy.aait-sa.com/login">Sign in</a></li>
-          <li><a href="https://alshaerawy.aait-sa.com/register">Sign up</a></li>
+          <li><a href="{{env('APP_URL')}}/login">Sign in</a></li>
+          <li><a href="{{env('APP_URL')}}/register">Sign up</a></li>
         </ul>
         <div class="buttons">
-          <a href="https://alshaerawy.aait-sa.com/login" class="signin">Sign In</a>
-          <a href="https://alshaerawy.aait-sa.com/register" class="signup">Sign Up</a>
+          <a href="{{env('APP_URL')}}/login" class="signin">Sign In</a>
+          <a href="{{env('APP_URL')}}/register" class="signup">Sign Up</a>
         </div>
       </nav>
     </header>

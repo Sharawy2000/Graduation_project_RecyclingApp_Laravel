@@ -58,7 +58,7 @@ class UserRegisterService{
             $this->SendMail($user);
 
             DB::commit();
-
+            
             return response_data("",__("auth.created"));
 
         } catch (Exception $e) {

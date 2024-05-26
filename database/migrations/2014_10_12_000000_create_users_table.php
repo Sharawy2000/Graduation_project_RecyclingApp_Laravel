@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('user_type')->nullable();
             $table->string('organization')->nullable();
             $table->string('TIN')->nullable();
-
+            $table->decimal('balance')->nullable();
+            $table->decimal('commision')->nullable();
+            // add commision to table
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->string('governorate')->nullable();
             $table->string('city')->nullable();
             $table->String('street')->nullable();
@@ -30,6 +33,11 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->String('social_id')->nullable();
             $table->String('social_type')->nullable();
+
+            //delete cascade if user is deleted all it posts deleted also 
+            
+
+            
 
             $table->timestamps();
         });

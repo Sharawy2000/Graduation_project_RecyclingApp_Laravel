@@ -39,11 +39,21 @@ class UserController extends Controller
     public function verify_email($token) {
         
         $user = User::where('verificationToken', $token)->update(['status' => 1, 'email_verified_at' => now()]);
+        
         if ($user == null) {
             return response_data("",__('auth.notVerified'),422);
             
         }
         return view('emails.mailVerified');
+        
+    }
+    public function FCMTokenController(Request $request) {
+        
+        $user = auth()->user(); // Assuming user is authenticated
+        $user->fcm_token = $request->input('token');
+        $user->save();
+
+        return response_data($user,'FCM token stored successfully',200);
         
     }
     
@@ -69,11 +79,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function userProfile() {
-        return response_data(auth()->user(),"");
+    public function userProfile($id) {
+        $user=User::where('id',$id)->first();
+        return response_data($user,"");
 
     }
-    public function update(Request $request) {
+    public function show_posts(){
+        $user=auth()->user();
+        $posts=$user->posts;
+        return response_data($posts,"");
+    }
+    public function update(Request $request , $id) {
         $validator=Validator::make($request->all(),[
             'name'=>'nullable|String|max:50',
             "phone_number"=>'nullable|min:11|max:11|unique:users',
@@ -85,11 +101,15 @@ class UserController extends Controller
             "residential_quarter"=>'nullable|String|max:60',
             "TIN"=>'nullable|digits:9|unique:users,TIN,',
             "organization"=>'nullable|string|max:30',
+            "interests"=>'nullable|string|max:255',
+            // add balance as inteager valueType => intValue
+            "balance"=>'nullable|integer',
+            "commision"=>'nullable|integer'
         ]);
-        $user = auth()->user();
+        // $user = auth()->user();
 
         if(!$validator->fails()) {
-            $User=User::findOrFail($user->id);
+            $User=User::findOrFail($id);
             $User->update($request->all());
 
             return response_data($User,__('auth.update'));

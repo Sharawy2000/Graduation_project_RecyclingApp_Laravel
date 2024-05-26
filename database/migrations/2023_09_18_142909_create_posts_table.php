@@ -19,8 +19,10 @@ return new class extends Migration
             $table->decimal('price');
             $table->longText('description');
             $table->enum('status',['pending','approved','rejected'])->default('pending');
+            $table->boolean('available')->default(true);
             $table->longText('reject_reason')->nullable();
             $table->string('image');
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

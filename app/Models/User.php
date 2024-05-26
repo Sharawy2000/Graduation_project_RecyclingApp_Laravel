@@ -33,6 +33,10 @@ class User extends Authenticatable implements JWTSubject
         'city',
         'street',
         'residential_quarter',
+        'interests',
+        'balance',
+        'commision',
+        'role',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -72,4 +76,25 @@ class User extends Authenticatable implements JWTSubject
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    // public function wishlist(){
+    //     return $this->hasMany(Wishlist::class);
+    // }
+    public function wishlists(){
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->posts()->delete();
+        });
+    }
+    
+
 }

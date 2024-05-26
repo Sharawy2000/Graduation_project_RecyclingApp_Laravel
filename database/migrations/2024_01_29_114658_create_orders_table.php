@@ -12,9 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->integer('quantity');
 
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id');
+            $table->string('buyer_id')->nullable();
+            $table->string('seller_id')->nullable();
+            
+            $table->enum('status', ['pending','paid'])->default('pending');
+            $table->enum('payment_method', ['cash_on_delivery','online_payment'])->default('cash_on_delivery');
+            $table->string('online_payment_method')->nullable();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });
     }

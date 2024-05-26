@@ -51,9 +51,8 @@ return [
             'hash' => false,
         ],
         'admin' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'admins',
-            'hash' => false,
         ],
     ],
 

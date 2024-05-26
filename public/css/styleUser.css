@@ -1,0 +1,59 @@
+.user {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.user-email, .user-role {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.user-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button, .delete-button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #0056b3;
+}
+
+.user-image {
+    width: 80px; /* Adjust image width as needed */
+    height: 80px; /* Adjust image height as needed */
+    border-radius: 50%; /* Makes the image circular */
+    margin-right: 10px; /* Adjust spacing between image and user details */
+}
+
+.user-image img {
+    width: 100%; /* Ensures the image fills the circular container */
+    height: auto;
+}

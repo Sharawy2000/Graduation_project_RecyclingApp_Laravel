@@ -114,7 +114,7 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-    <form action="https://alshaerawy.aait-sa.com/api/auth/user/register" method="post">
+    <form action="{{env('APP_URL')}}/api/auth/user/register" method="post">
       <div class="input-box">
         <input type="text" name="name" placeholder="Enter your name" required>
       </div>
@@ -142,9 +142,13 @@
       <div class="input-box">
         <input type="text" name="phone_number" placeholder="Phone number"  required>
       </div>
-      @error('phone_number')
+
+      <div class="input-box">
+        <input type="text" name="user_type" placeholder="User Type"  required>
+      </div>
+      {{-- @error('phone_number')
             <p>{{$message}}</p>
-      @enderror
+      @enderror --}}
       <!--<div class="input-box">-->
       <!--  <input type="text" name="location" placeholder="Enter your location" required>-->
       <!--</div>-->
@@ -171,7 +175,7 @@
         <input type="Submit" value="Register Now">
       </div>
       <div class="text">
-        <h3>Already have an account? <a href="http://alshaerawy.aait-sa.com/login">Login now</a></h3>
+        <h3>Already have an account? <a href="{{env('APP_URL')}}/login">Login now</a></h3>
       </div>
     </form>
   </div>

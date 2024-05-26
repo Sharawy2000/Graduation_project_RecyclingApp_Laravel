@@ -74,6 +74,8 @@ return [
 
     'connection' => env('SESSION_CONNECTION'),
 
+
+    
     /*
     |--------------------------------------------------------------------------
     | Session Database Table
