@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Http;
 
 
 /*
@@ -271,7 +272,31 @@ Route::get('/logout',[AdminController::class,'adminLogout'])->name('dashboard.lo
 // routes/web.php
 
 
+Route::get('/get/flask-access-token', function () {
+    // URL of the Flask app endpoint
+    $flaskAppUrl = 'https://rekiatestapi.pythonanywhere.com/get-access-token';
 
+    // Make a GET request to the Flask app endpoint
+    $response = Http::get($flaskAppUrl);
+
+    // Check if the request was successful (status code 200)
+    if ($response->successful()) {
+        // Decode the JSON response
+        $responseData = $response->json();
+
+        // Extract the access token from the response
+        $accessToken = $responseData['access_token'];
+        // dd($accessToken);
+
+        // Now you can use the access token in your Laravel application
+        // For example, you can store it in a database or use it for authentication
+
+        return response()->json(['access_token' => $accessToken]);
+    } else {
+        // If the request was not successful, return an error response
+        return response()->json(['error' => 'Failed to retrieve access token'], $response->status());
+    }
+});
 
 
 // Route::get('/index',function(){
@@ -295,6 +320,13 @@ Route::group([
 
 
 });
+// create route to send notification
+
+Route::get('notifiy/access/token',function(){
+    return view('test.main');
+});
+
+
 
 
 

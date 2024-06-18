@@ -69,7 +69,10 @@ Route::group([
     Route::post('/order/add/{id}/{buyerID}','add_to_chart');
     Route::post('/order/{id}','order_process');
     Route::get('/order/chart/{buyerID}','chart_orders');
+    Route::get('/order/seller/history/{user_id}','seller_orders_completed');
+    Route::get('/order/buyer/history/{user_id}','buyer_orders_completed');
 
+    Route::post('/order/confirm/{order_id}','process_confimation');
 
 
 });
@@ -109,10 +112,13 @@ Route::group([
         Route::get('/{token}', 'verify_email');
         Route::post('/user-profile/{id}', 'userProfile');
         Route::post('/profileimg','update_profileIMG');
-        Route::get('/show/posts','show_posts');
-        Route::get('/history','orders_completed');
         Route::post('/store-fcm-token', 'FCMTokenController');
-
+        Route::get('/show/posts','show_posts');
+        Route::get('/show/seller/notifications','show_seller_notifications');
+        Route::get('/show/buyer/notifications','show_buyer_notifications');
+        Route::get('/show/seller/confirm-notifications','seller_confirm_notification');
+        Route::get('/show/buyer/confirm-notifications','buyer_confirm_notification');
+        Route::get('/show/buyer/responses','buyer_responses');
 
 
     });

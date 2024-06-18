@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('TIN')->nullable();
             $table->decimal('balance')->nullable();
             $table->decimal('commision')->nullable();
-            // add commision to table
+            
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->string('governorate')->nullable();
             $table->string('city')->nullable();

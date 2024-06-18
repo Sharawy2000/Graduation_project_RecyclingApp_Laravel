@@ -5,6 +5,9 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SellerNotification;
+use App\Models\BuyerNotification;
+use App\Models\ConfirmationNotification;
 use App\Services\UserService\UserLoginService\UserLoginService;
 use App\Services\UserService\UserRegisterService\UserRegisterService;
 use Illuminate\Support\Facades\Validator;
@@ -85,10 +88,43 @@ class UserController extends Controller
 
     }
     public function show_posts(){
+        
         $user=auth()->user();
-        $posts=$user->posts;
+        $posts = $user->posts;
+        
         return response_data($posts,"");
     }
+    public function show_seller_notifications(){
+        $user=auth()->user();
+        $notifications = SellerNotification::where('to_who', $user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        return response_data($notifications,"Seller Notifications");
+    }
+    public function show_buyer_notifications(){
+        $user=auth()->user();
+        $notifications = BuyerNotification::where('from_who', $user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        return response_data($notifications,"Buyer Notifications");
+    }
+    public function buyer_confirm_notification(){
+        $user=auth()->user();
+        $confirm_notification = ConfirmationNotification::where('buyer_id',$user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+        return response_data($confirm_notification,"Confirm Notifications");
+    }
+    public function seller_confirm_notification(){
+        $user=auth()->user();
+        $confirm_notification = ConfirmationNotification::where('seller_id',$user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+        return response_data($confirm_notification,"Confirm Notifications");
+    }
+
     public function update(Request $request , $id) {
         $validator=Validator::make($request->all(),[
             'name'=>'nullable|String|max:50',
@@ -102,11 +138,9 @@ class UserController extends Controller
             "TIN"=>'nullable|digits:9|unique:users,TIN,',
             "organization"=>'nullable|string|max:30',
             "interests"=>'nullable|string|max:255',
-            // add balance as inteager valueType => intValue
             "balance"=>'nullable|integer',
             "commision"=>'nullable|integer'
         ]);
-        // $user = auth()->user();
 
         if(!$validator->fails()) {
             $User=User::findOrFail($id);
@@ -145,9 +179,7 @@ class UserController extends Controller
             $file->move(public_path($path) , $filename);
             $User=User::findOrFail($user->id);
 
-            // $User->image=$file->getRealPath();
             $User->image=url($path,$filename);
-            // dd($User->image);
 
             $User->save();
 
@@ -162,8 +194,7 @@ class UserController extends Controller
     }
 
 
-//
-//    }
+
     /**
      * Get the token array structure.
      *

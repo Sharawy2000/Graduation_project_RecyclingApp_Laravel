@@ -55,7 +55,7 @@ class UserRegisterService{
             $data=$this->Validation($request);
             $email=$this->Store($data,$request);
             $user=$this->GenerateToken($email);
-            $this->SendMail($user);
+            // $this->SendMail($user);
 
             DB::commit();
             
