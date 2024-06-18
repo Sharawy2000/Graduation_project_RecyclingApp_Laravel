@@ -33,7 +33,18 @@
          4. 'navbar-fixed'		  - Fixed navbar
      -->
  
- <body class="navbar-fixed sidebar-nav fixed-nav">
+  <style>
+    @media screen and (max-width: 768px) {
+        .nav-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    }
+</style>
+
+ <body class="navbar-fixed sidebar-nav fixed-nav" style="background-color: #27B645" >
      @include("Dashboard.layouts.header")
      @include("Dashboard.layouts.sidebar")
      <!-- Main content -->

@@ -1,14 +1,15 @@
-<header class="navbar">
+<header class="navbar" style="background-color: #f4f4f4">
     <div class="container-fluid">
         <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-        {{-- <a class="navbar-brand" href="{{env('APP_URL')}}"><img src="{{url('adminassets/img/logo.png')}}" width="100px" height="40px"></a> --}}
-        <a class="navbar-brand" href="{{env('APP_URL')}}"></a>
+        <a class="navbar-brand" href="{{env('APP_URL')}}" style="display: flex; justify-content: center; align-items: center;background-color: #f4f4f4">
+            <img class="nav-logo-container" src="{{url('adminassets/img/coreui-logotyp.png')}}" width="100px" height="40px">
+        </a> 
+        <!--<a class="navbar-brand" href="{{env('APP_URL')}}"></a>-->
 
         <ul class="nav navbar-nav hidden-md-down">
             <li class="nav-item">
                 <a class="nav-link navbar-toggler layout-toggler" href="#">&#9776;</a>
             </li>
-
             <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
             </li>
@@ -21,6 +22,10 @@
             <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{route('rejected')}}">Rejected list</a>
             </li>
+            <li class="nav-item p-x-1">
+                <a class="nav-link" href="{{route('paid')}}">Paid list</a>
+            </li>
+            
         </ul>
         <ul class="nav navbar-nav pull-left hidden-md-down">
             <li class="nav-item">

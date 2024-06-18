@@ -10,8 +10,7 @@
     </div>
     <div class="profile-info">
         <div class="avatar">
-                <img class="user-image" src="{{$user->image}}" 
-                onerror="this.src='{{url('adminassets/img/avatars/User_icon_2.png')}}'" alt="image">
+            <img src="{{url('adminassets/img/avatars/images.png')}}" alt="Admin Avatar">
         </div>
         <div class="details">
             <p><strong>Name:</strong> {{$admin->name}}</p>

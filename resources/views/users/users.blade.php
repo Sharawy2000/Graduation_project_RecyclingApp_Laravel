@@ -11,7 +11,7 @@
             <div class="user-info">
                 <img class="user-image" src="{{$user->image}}" onerror="this.src='{{url('adminassets/img/avatars/User_icon_2.png')}}'" alt="image">
                 <div style="margin-right: 20px">
-                    <a href="{{ route('users.profile', $user) }}"><h2 class="user-name">{{$user->name}}</h2></a>
+                    <h2 class="user-name">{{$user->name}}</h2>
                     <p class="user-email">{{$user->email}}</p>
                     <p class="user-role">{{$user->user_type}}</p>
                 </div>

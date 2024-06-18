@@ -1,6 +1,6 @@
-@if($errors->any())
-{{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
+<!--@if($errors->any())-->
+<!--{{ implode('', $errors->all('<div>:message</div>')) }}-->
+<!--@endif-->
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
@@ -180,31 +180,26 @@
   </head>
   <body>
     <div class="container">
-      <form action="{{env('APP_URL')}}/api/auth/user/login" method="post">
-        @csrf
+      <form action="https://alshaerawy.aait-sa.com/api/auth/user/login" method="post">
         <div class="title">Login</div>
         <div class="input-box underline">
           <input type="text" name="email" placeholder="Enter Your Email" required>
           <div class="underline"></div>
         </div>
-        <!--@error('email')-->
-        {{-- <!--    <div class="error">{{ $message }}</div>--> --}}
-        <!--@enderror-->
-        <!--@if($errors->has('email'))-->
-        {{-- <!-- <div class="error">{{ $errors->first('email') }}</div>--> --}}
-        <!--@endif-->
+        @error('email')
+            <p>{{$message}}</p>
+        @enderror
+        
         <div style="margin-bottom: 20px" class="input-box">
           <input type="password" name="password" placeholder="Enter Your Password" required>
           <div class="underline"></div>
         </div>
-        <!-- @error('password')-->
-        {{-- <!--    <div class="error">{{ $message }}</div>--> --}}
-        <!--@enderror-->
-        <!--@if($errors->has('password'))-->
-        {{-- <!--    <div class="error">{{ $errors->first('password') }}</div>--> --}}
-        <!--@endif-->
+        @error('password')
+            <p>{{$message}}</p>
+        @enderror
+        
         <div><a style="font-size: 14px; font-weight:400; " 
-        href="{{route('reset')}}">Forget password ?</a></div>
+        href="https://alshaerawy.aait-sa.com/reset">Forget password ?</a></div>
         <div class="input-box button">
             <input type="submit" name="" value="Continue">
         </div>
@@ -220,7 +215,7 @@
         <a href="#"><i class="fab fa-google"></i>Sign in With Google</a>
     </div>
     <div class="text">
-        <p style="color: black">Don't have an account? <a style="font-size: 14px; font-weight:400 " href="{{env('APP_URL')}}/register">Sign Up Now</a></p>
+        <p style="color: black">Don't have an account? <a style="font-size: 14px; font-weight:400 " href="https://alshaerawy.aait-sa.com/register">Sign Up Now</a></p>
     </div>
     
 </div>

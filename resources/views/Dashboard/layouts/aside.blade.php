@@ -20,7 +20,7 @@
             <hr class="transparent m-x-1 m-y-0">
             <div class="callout callout-warning m-a-0 p-y-1">
                 <div class="avatar pull-xs-right">
-                    <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <img src="img/avatars/7.jpg" class="img-avatar" alt="admin ">
                 </div>
                 <div>Meeting with
                     <strong>Lucas</strong>
@@ -31,7 +31,7 @@
             <hr class="m-x-1 m-y-0">
             <div class="callout callout-info m-a-0 p-y-1">
                 <div class="avatar pull-xs-right">
-                    <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <img src="img/avatars/4.jpg" class="img-avatar" alt="admin ">
                 </div>
                 <div>Skype with
                     <strong>Megan</strong>
@@ -48,31 +48,31 @@
             <div class="callout callout-danger m-a-0 p-y-1">
                 <div>New UI Project -
                     <strong>deadline</strong>
-                </div>
-                <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
-                <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
-                <div class="avatars-stack m-t-h">
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
+                <!--</div>-->
+                <!--<small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>-->
+                <!--<small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>-->
+                <!--<div class="avatars-stack m-t-h">-->
+                <!--    <div class="avatar avatar-xs">-->
+                <!--        <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                <!--    </div>-->
+                <!--    <div class="avatar avatar-xs">-->
+                <!--        <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                <!--    </div>-->
+                <!--    <div class="avatar avatar-xs">-->
+                <!--        <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                <!--    </div>-->
+                <!--    <div class="avatar avatar-xs">-->
+                <!--        <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                <!--    </div>-->
+                <!--    <div class="avatar avatar-xs">-->
+                <!--        <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                <!--    </div>-->
                 </div>
             </div>
             <hr class="m-x-1 m-y-0">
             <div class="callout callout-success m-a-0 p-y-1">
                 <div>
-                    <strong>#10 Startups.Garden</strong>Meetup</div>
+                    <strong>#10 Startups.Garden </strong>Meetup</div>
                 <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
                 <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
             </div>
@@ -84,27 +84,27 @@
                 <small class="text-muted m-r-1"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
                 <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
                 <div class="avatars-stack m-t-h">
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
-                    <div class="avatar avatar-xs">
-                        <img src="img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    </div>
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
+                    <!--<div class="avatar avatar-xs">-->
+                    <!--    <img src="img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">-->
+                    <!--</div>-->
                 </div>
             </div>
             <hr class="m-x-1 m-y-0">
