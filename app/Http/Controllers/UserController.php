@@ -26,7 +26,7 @@ class UserController extends Controller
         $this->middleware('auth:user', ['except' => ['login', 'register','verify_email']]);
         $this->middleware(CheckLang::class);
     }
-    
+
     public function login(LoginRequest $request){
 
         return(new UserLoginService())->Login($request);
@@ -38,18 +38,23 @@ class UserController extends Controller
         return(new UserRegisterService())->Register($request);
     }
 
-    
+    /**
+     * Log the user out (Invalidate the token).
+     *
+//     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function verify_email($token) {
-        
+
         $user = User::where('verificationToken', $token)->update(['status' => 1, 'email_verified_at' => now()]);
-        
         if ($user == null) {
             return response_data("",__('auth.notVerified'),422);
-            
+
         }
         return view('emails.mailVerified');
-        
+
     }
+    
     public function FCMTokenController(Request $request) {
         
         $user = auth()->user(); // Assuming user is authenticated
@@ -59,12 +64,7 @@ class UserController extends Controller
         return response_data($user,'FCM token stored successfully',200);
         
     }
-    
-    /**
-     * Log the user out (Invalidate the token).
-     *
-//     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function logout() {
         auth()->logout();
         return response_data("",__('auth.logout'));
@@ -83,17 +83,18 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile($id) {
+        
         $user=User::where('id',$id)->first();
         return response_data($user,"");
 
     }
+    
     public function show_posts(){
-        
         $user=auth()->user();
-        $posts = $user->posts;
-        
+        $posts = $user->posts()->orderBy('created_at', 'desc')->get();
         return response_data($posts,"");
     }
+    
     public function show_seller_notifications(){
         $user=auth()->user();
         $notifications = SellerNotification::where('to_who', $user->id)
@@ -109,6 +110,7 @@ class UserController extends Controller
                         ->get();
 
         return response_data($notifications,"Buyer Notifications");
+        // return response_data($notifications,"");
     }
     public function buyer_confirm_notification(){
         $user=auth()->user();
@@ -124,29 +126,31 @@ class UserController extends Controller
                         ->get();
         return response_data($confirm_notification,"Confirm Notifications");
     }
-
-    public function update(Request $request , $id) {
+    
+    
+    public function update(Request $request) {
         $validator=Validator::make($request->all(),[
             'name'=>'nullable|String|max:50',
             "phone_number"=>'nullable|min:11|max:11|unique:users',
             "address"=>'nullable|String|max:50',
-            "image"=>'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             "governorate"=>'nullable|String|max:30',
             "city"=>'nullable|String|max:30',
             "street"=>'nullable|String|max:60',
             "residential_quarter"=>'nullable|String|max:60',
-            "TIN"=>'nullable|digits:9|unique:users,TIN,',
-            "organization"=>'nullable|string|max:30',
+            "TIN"=>'nullable|String|min:9|max:9|unique:users,TIN,',
             "interests"=>'nullable|string|max:255',
-            "balance"=>'nullable|integer',
-            "commision"=>'nullable|integer'
-        ]);
+
+            ]);
+            
+        $user = auth()->user();
+
 
         if(!$validator->fails()) {
-            $User=User::findOrFail($id);
+            $User=User::findOrFail($user->id);
             $User->update($request->all());
 
             return response_data($User,__('auth.update'));
+            
         }else{
 
             return response_data("",$validator->errors(),422);
@@ -155,6 +159,7 @@ class UserController extends Controller
 
 
     }
+    
     public function update_profileIMG(Request $request) {
 
         $request->validate([
@@ -176,11 +181,9 @@ class UserController extends Controller
             $extension = $file -> getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $path='images/ProfileImage';
-            $file->move(public_path($path) , $filename);
+            $file->move($path , $filename);
             $User=User::findOrFail($user->id);
-
             $User->image=url($path,$filename);
-
             $User->save();
 
             return response_data($User,__('auth.update'));
@@ -192,7 +195,6 @@ class UserController extends Controller
  
         
     }
-
 
 
     /**
@@ -208,7 +210,7 @@ class UserController extends Controller
         return response_data([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60000,
+            'expires_in' => auth()->factory()->getTTL() * 60,
         ],'');
 
     }

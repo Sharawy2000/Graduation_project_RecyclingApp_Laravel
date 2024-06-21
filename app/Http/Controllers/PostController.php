@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\CategoryInfo;
 use App\Models\SellerNotification;
 use App\Models\BuyerNotification;
 use App\Models\ConfirmationNotification;
@@ -29,9 +30,12 @@ class PostController extends Controller
     }
 
     public function index(){
-        $posts=Post::where('available',True)
-                        ->orderBy('created_at', 'desc')
-                        ->get();
+
+        $posts = Post::where('available', true)
+             ->where('status', 'approved')
+             ->orderBy('created_at', 'desc')
+             ->get();
+                        
 
 
         return response_data($posts,"");
@@ -46,12 +50,15 @@ class PostController extends Controller
     public function show($id){
 
         $post=Post::find($id);
+        // $post->comments;
+        // $post->reactions;
 
         return response_data($post,"");
     }
     public function search($query){
         $results=Post::where('location','like',"%".$query."%")
             ->get();
+
         
         if (count($results)){
             
@@ -116,23 +123,25 @@ class PostController extends Controller
         $post=Post::create($data);
         
         // Find users interested in the material of the new post
-        $interestedUsers = User::where('interests', 'like', "%{$post->material}%")->get();
+        // $interestedUsers = User::where('interests', 'like', "%{$post->material}%")->get();
         
 
-        // Send notifications to interested users
+        // // Send notifications to interested users
+        
+        // if (!empty($interestedUsers)) {
 
-        if (!empty($interestedUsers)) {
+        //     $title = "New Post in Material: " . $post->material;
+        //     $body = "A new post has been created: " . $post->description;
 
-            $title = "New Post in Material: " . $post->material;
-            $body = "A new post has been created: " . $post->description;
-
-            foreach ($interestedUsers as $user) {
+        //     foreach ($interestedUsers as $user) {
                 
-                $r=$this->notificationService->sendNotification($user['fcm_token'], $title, $body);
-                // dd($r);
-            }
+        //         // dd($user['fcm_token']);
+                
+        //         $this->notificationService->sendNotification($user['fcm_token'], $title, $body);
+        //         // dd($r);
+        //     }
             
-        }
+        // }
 
 
         return response_data($post,"Post has been added");
@@ -157,7 +166,6 @@ class PostController extends Controller
     
                 if ($img) {
                     $path='images/posts/'.basename($img);
-                    // dd($path);
                     Storage::disk('public')->delete($path);
                 }
                 // image  uploading
@@ -169,9 +177,7 @@ class PostController extends Controller
 
                 $c_post=post::findOrFail($id);
     
-                // $User->image=$file->getRealPath();
                 $c_post->image=url($path,$filename);
-                // dd($c_post->image);
     
                 $c_post->save();
     
@@ -204,9 +210,6 @@ class PostController extends Controller
     }
 
     public function delete($id){
-
-        // Post::where('id',$id)->delete();
-        // return response_data('Post has deleted successfully');
         
         $post=Post::findOrFail($id);
         if($post->user_id==auth()->id() || auth()->user()->type=="super-admin" )
@@ -237,16 +240,18 @@ class PostController extends Controller
             
         }
 
-        //make shue user not save same post again
+        // dd($user->wishlists);
+
+        //make sure user not save same post again
         
-        foreach ($user->wishlist as  $value) {
-           # code...
-            if ($value->post_id == $id) {
-            
-                // delete $value from database and break loop
-                WishList::destroy($value->id);
-                return response_data("","This post has been removed from your wishlist.",409);
-            }
+        foreach ($user->wishlists as  $value) {
+            # code...
+             if ($value->post_id == $id) {
+             
+                 // delete $value from database and break loop
+                 WishList::destroy($value->id);
+                 return response_data("","This post has been removed from your wishlist.",409);
+             }
         }
         
         // Add the post to the user's wishlist
@@ -265,7 +270,7 @@ class PostController extends Controller
     {
         // Retrieve saved posts from the database (you can customize this query based on your requirements)
 
-        $wishlist=auth()->user()->wishlist;
+        $wishlist=auth()->user()->wishlists;
         $posts=[];
         foreach ($wishlist as  $value) {
             $post=Post::where('id', $value->post_id)->get();
@@ -294,11 +299,11 @@ class PostController extends Controller
             
         }
 
-        // dd($user->orders);
+
         
         //make sure user not save same post again
         foreach ($user->orders as  $value) {
-            # code...
+
 
             if($post->available==False){
                 
@@ -307,7 +312,7 @@ class PostController extends Controller
             }
 
             if ($value->post_id == $id) {
-                
+            
                 
                 return response_data("","The order is already in cart .",409);
                 
@@ -322,6 +327,7 @@ class PostController extends Controller
         $order_item->buyer_id = $buyerID;
         $order_item->save();
         
+        // DeleteOrder::dispatch($order_item)->delay(now()->addDays($request->order_expire));
         
         SellerNotification::create([
             "content"=>"You have a new order for your product.",
@@ -358,9 +364,11 @@ class PostController extends Controller
         $order=Order::findOrFail($id);
         
         $request->validate([
-            
+            // 'credit_card'=>'required|numeric',
             'condition'=>'required|string|min:6|max:6'
         ]);
+        
+        SellerNotification::where("linked_id",$id)->delete();
         
         if (!$request->condition or $request->condition=="Reject" or $request->condition=="reject" ){
             
@@ -371,24 +379,24 @@ class PostController extends Controller
                 "linked_id"=>$order->id,
                 "status"=>"rejected"
             ]);
-
             // Find users interested in the material of the new post
             $targetUser = User::where('id',$order->buyer_id)->get();
-
+            
             $seller=User::where('id',$order->seller_id)->get();
             
             // Send notifications to interested users
-
+            
             if (!empty($targetUser)) {
-
+                
                 $title = $seller[0]->name ." rejects your request";
                 $body = "A post ".$order->post_id." has been rejected from the seller";
-
+                
                 foreach ($targetUser as $user) {
                     $this->notificationService->sendNotification($user['fcm_token'], $title, $body);
                 }
                 
             }
+            Order::findOrFail($id)->delete();
             
             return response_data("","Thank you for responding.",409);
             
@@ -460,7 +468,7 @@ class PostController extends Controller
                 "transaction_date"=>\Carbon\Carbon::now(),      
                 "type"=>2      // type : payment
             ]);        
-        
+            
             // Find users interested in the material of the new post
             $targetUser = User::where('id',$buyer->id)->get();
 
@@ -500,6 +508,7 @@ class PostController extends Controller
         ]);
 
         $user=auth()->user();
+        // dd($user->id);
 
         $order=Order::where("id",$order_id)->get();
         $confirm_notification=ConfirmationNotification::where("order_id",$order_id)->get();
@@ -567,7 +576,7 @@ class PostController extends Controller
     public function buyer_orders_completed($user_id)
     {
         
-        // get orders of buyer
+        // get orders of seller or buyer
 
 
         $order = Order::Where('buyer_id',$user_id)
@@ -590,7 +599,7 @@ class PostController extends Controller
     public function seller_orders_completed($user_id)
     {
         
-        // get orders of seller
+        // get orders of seller or buyer
 
 
         $order = Order::where('seller_id',$user_id)
@@ -608,5 +617,10 @@ class PostController extends Controller
 
         return response_data(array_reverse($orders),'History',200);
 
+    }
+
+    public function show_categories(){
+        $categories = CategoryInfo::get();
+        return response_data($categories,'Categories',200);
     }
 }

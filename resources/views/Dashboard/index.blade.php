@@ -14,7 +14,7 @@
                 <h2 class="post-title">{{$post->material}}</h2>
                 <div class="post-buttons">
                     {{-- <button class="edit-button">Edit</button> --}}
-                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary"><strong> Edit</strong></a>
+                    <a href="{{ route('posts.edit', $post) }}" style="background-color: #27B645" class="btn btn-primary"><strong> Edit</strong></a>
                 </div>
             </div>
             <img class="post-image" src="{{$post->image}}" alt="Post Image" height="150px" width="150px">

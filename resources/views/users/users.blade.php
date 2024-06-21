@@ -18,7 +18,7 @@
             </div>
             <div class="user-buttons">
                 
-                <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('users.edit', $user) }}" style="background-color: #27B645;" class="btn btn-primary"><strong>Edit</strong></a>
                 <form action="{{route('user.delete',$user)}}" method="post">
                     @csrf
                     @method('DELETE')

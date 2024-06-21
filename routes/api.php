@@ -11,7 +11,6 @@ use App\Http\Controllers\{ٍReviewController,
     
 use App\Http\Controllers\Reset_Password_Api\ResetPasswordController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +21,6 @@ use App\Http\Controllers\Reset_Password_Api\ResetPasswordController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 
 
 Route::get('login/facebook', [SocialController::class,"redirect"]);
@@ -50,7 +48,7 @@ Route::group([
 
 ],function(){
 
-    Route::get('/home','index')->name('home');
+    Route::get('/home','index');
     Route::get('/waiting','waiting_list');
     Route::get('/{id}','show');
     Route::post('/add','store');
@@ -58,25 +56,20 @@ Route::group([
     Route::post('/{id}/edit','update');
     Route::put('/{id}/admin/edit','update_admin')->middleware('auth:admin');
     Route::get('/search/{query}','search');
-    
+    Route::get('/categories','show_categories');
     Route::get('/category/{category}','get_category');
-
     Route::post('/save-post/{id}', 'savePost');
     Route::get('/saved/list', 'savedPosts');
-
     Route::post('/classify','image_classification');
-
+    
     Route::post('/order/add/{id}/{buyerID}','add_to_chart');
     Route::post('/order/{id}','order_process');
     Route::get('/order/chart/{buyerID}','chart_orders');
     Route::get('/order/seller/history/{user_id}','seller_orders_completed');
     Route::get('/order/buyer/history/{user_id}','buyer_orders_completed');
-
     Route::post('/order/confirm/{order_id}','process_confimation');
 
-
 });
-
 
 Route::group([
 
@@ -108,17 +101,17 @@ Route::group([
         Route::post('/register', 'register');
         Route::post('/logout', 'logout');
         Route::post('/refresh', 'refresh');
-        Route::put('/{id}/edit', 'update');
+        Route::put('/edit', 'update');
         Route::get('/{token}', 'verify_email');
         Route::post('/user-profile/{id}', 'userProfile');
         Route::post('/profileimg','update_profileIMG');
-        Route::post('/store-fcm-token', 'FCMTokenController');
         Route::get('/show/posts','show_posts');
+        Route::post('/store-fcm-token', 'FCMTokenController');
         Route::get('/show/seller/notifications','show_seller_notifications');
         Route::get('/show/buyer/notifications','show_buyer_notifications');
         Route::get('/show/seller/confirm-notifications','seller_confirm_notification');
         Route::get('/show/buyer/confirm-notifications','buyer_confirm_notification');
-        Route::get('/show/buyer/responses','buyer_responses');
+        // Route::get('/show/buyer/responses','buyer_responses');
 
 
     });

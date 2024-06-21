@@ -36,7 +36,10 @@
 
                     <form action="{{ route('posts.restore', $post) }}" method="post" style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary">Restore</button>
+                        <button type="submit" class="btn btn-primary"
+                                style="background-color: white; color: #27B645; border: 2px solid #27B645;width:85px;height:36.5px;padding:5px;">
+                                Restore
+                        </button>
                     </form>
                 </div>
             </div>

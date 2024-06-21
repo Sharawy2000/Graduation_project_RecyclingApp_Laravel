@@ -1,12 +1,12 @@
-<div class="sidebar" style="background-color: #004100">
-    <nav class="sidebar-nav">
+<div class="sidebar" style="color:red;">
+    <nav class="sidebar-nav"  style="background-color: #27B645">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard')}}"><i class="icon-speedometer"></i> Dashboard <span class="tag tag-info"></span></a>
+                <a class="nav-link"  href="{{route('dashboard')}}"><i class="icon-star"></i> Dashboard <span class="tag tag-info"></span></a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.profile',$admin)}}"><i class="icon-speedometer"></i> Profile <span class="tag tag-info"></span></a>
+                <a class="nav-link"  href="{{route('admin.profile',$admin)}}"><i class="icon-star"></i> Profile <span class="tag tag-info"></span></a>
             </li>
 
             <li class="nav-title">
@@ -14,19 +14,22 @@
             </li>
 
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Operations</a>
+                <a class="nav-link nav-dropdown-toggle"  href="#"><i class="icon-star"></i> Operations</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('users')}}" target="_top"><i class="icon-star"></i> Users </a>
+                        <a class="nav-link" id="my-button"  href="{{route('users')}}" target="_top"><i class="icon-star"></i> Users </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('waiting')}}" target="_top"><i class="icon-star"></i> Waiting list</a>
+                        <a class="nav-link" id="my-button"  href="{{route('waiting')}}" target="_top"><i class="icon-star"></i> Waiting list</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('rejected')}}" target="_top"><i class="icon-star"></i> Rejected list</a>
+                        <a class="nav-link" id="my-button"  href="{{route('rejected')}}" target="_top"><i class="icon-star"></i> Rejected list</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('paid')}}" target="_top"><i class="icon-star"></i> Paid list</a>
+                        <a class="nav-link" id="my-button"  href="{{route('paid')}}" target="_top"><i class="icon-star"></i> Paid list</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="my-button"  href="{{route('categories')}}" target="_top"><i class="icon-star"></i> Categories</a>
                     </li>
                 </ul>
             </li>
@@ -86,10 +89,10 @@
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}" target="_top"><i class="icon-star"></i> Login</a>
+                        <a class="nav-link" id="my-button"  href="{{route('login')}}" target="_top"><i class="icon-star"></i> Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('register')}}" target="_top"><i class="icon-star"></i> Register</a>
+                        <a class="nav-link" id="my-button"  href="{{route('register')}}" target="_top"><i class="icon-star"></i> Register</a>
                     </li>
                     <!--<li class="nav-item">-->
                         <!--<a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error 404</a>-->
@@ -98,6 +101,9 @@
                         <!--<a class="nav-link" href="pages-500.html" target="_top"><i class="icon-star"></i> Error 500</a>-->
                     <!--</li>-->
                 </ul>
+            </li>
+            <li class="nav-item">
+                        <a class="nav-link" id="my-button"  href="{{route('dashboard.logout')}}" target="_top"><i class="icon-star"></i> Logout</a>
             </li>
 
         </ul>

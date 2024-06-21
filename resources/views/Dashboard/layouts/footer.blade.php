@@ -1,4 +1,4 @@
-<footer class="footer" style="background-color: #27B645">
+<footer class="footer">
     <span class="text-left">
         <a>CoreUI</a> &copy; 2016 creativeLabs.
     </span>

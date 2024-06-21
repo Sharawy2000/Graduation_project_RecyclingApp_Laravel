@@ -43,7 +43,8 @@ a {
 
 a:active,
 a:hover {
-  outline-width: 0; }
+  outline-width: 0;
+  background-color: #27B645}
 
 abbr[title] {
   border-bottom: none;
@@ -2302,7 +2303,7 @@ input[type="button"].btn-block {
   .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #20a8d8;
+    background-color: #27B645;
     outline: 0; }
   .dropdown-item.disabled, .dropdown-item.disabled:focus, .dropdown-item.disabled:hover {
     color: #b0bec5; }
@@ -2590,7 +2591,7 @@ input[type="button"].btn-block {
   .nav-tabs .nav-item.open .nav-link:focus,
   .nav-tabs .nav-item.open .nav-link:hover {
     color: #607d8b;
-    background-color: #e4e5e6;
+    background-color: #27B645;
     border-color: #ddd #ddd transparent; }
   .nav-tabs .dropdown-menu {
     margin-top: -1px; }
@@ -2612,7 +2613,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-item.open .nav-link:hover {
   color: #fff;
   cursor: default;
-  background-color: #20a8d8; }
+  background-color: #27B645; }
 
 .nav-stacked .nav-item {
   display: block;
@@ -2716,9 +2717,10 @@ input[type="button"].btn-block {
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .nav-link.active:focus,
 .navbar-light .navbar-nav .nav-link.active:hover {
-  color: rgba(0, 0, 0, 0.8); }
+  color: rgba(0, 0, 0, 0.8);
+  background-color: #27B645;}
 .navbar-light .navbar-divider {
-  background-color: rgba(0, 0, 0, 0.075); }
+  background-color: #27B645; }
 
 .navbar-dark .navbar-brand {
   color: white; }
@@ -2993,7 +2995,7 @@ input[type="button"].btn-block {
     z-index: 2;
     color: #fff;
     cursor: default;
-    background-color: #20a8d8;
+    background-color: #27B645;
     border-color: #20a8d8; }
   .page-item.disabled .page-link, .pagination-datatables li.disabled .page-link, .pagination li.disabled .page-link, .page-item.disabled .pagination-datatables li a, .pagination-datatables li .page-item.disabled a, .pagination-datatables li.disabled a, .page-item.disabled .pagination li a, .pagination li .page-item.disabled a, .pagination li.disabled a, .page-item.disabled .page-link:focus, .pagination-datatables li.disabled .page-link:focus, .pagination li.disabled .page-link:focus, .page-item.disabled .pagination-datatables li a:focus, .pagination-datatables li .page-item.disabled a:focus, .pagination-datatables li.disabled a:focus, .page-item.disabled .pagination li a:focus, .pagination li .page-item.disabled a:focus, .pagination li.disabled a:focus, .page-item.disabled .page-link:hover, .pagination-datatables li.disabled .page-link:hover, .pagination li.disabled .page-link:hover, .page-item.disabled .pagination-datatables li a:hover, .pagination-datatables li .page-item.disabled a:hover, .pagination-datatables li.disabled a:hover, .page-item.disabled .pagination li a:hover, .pagination li .page-item.disabled a:hover, .pagination li.disabled a:hover {
     color: #b0bec5;
@@ -3310,7 +3312,7 @@ base::-moz-progress-bar,
     z-index: 2;
     color: #fff;
     text-decoration: none;
-    background-color: #20a8d8;
+    background-color: #27B645;
     border-color: #20a8d8; }
     .list-group-item.active .list-group-item-heading,
     .list-group-item.active .list-group-item-heading > small,
@@ -3357,7 +3359,7 @@ button.list-group-item-success {
   button.list-group-item-success.active:focus,
   button.list-group-item-success.active:hover {
     color: #fff;
-    background-color: #3c763d;
+    background-color: #27B645;
     border-color: #3c763d; }
 
 .list-group-item-info {
@@ -3380,7 +3382,7 @@ button.list-group-item-info {
   button.list-group-item-info.active:focus,
   button.list-group-item-info.active:hover {
     color: #fff;
-    background-color: #31708f;
+    background-color: #27B645;
     border-color: #31708f; }
 
 .list-group-item-warning {
@@ -4668,7 +4670,8 @@ header.navbar .navbar-nav .nav-link {
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.active:focus,
 .navbar-nav .nav-link.active:hover {
-  color: rgba(0, 0, 0, 0.8); }
+  color: rgba(0, 0, 0, 0.8);
+  background-color: #27B645;}
 
 .navbar-divider {
   background-color: rgba(0, 0, 0, 0.075); }
@@ -5048,7 +5051,7 @@ body:not(.top-nav) .sidebar {
             color: #20a8d8 !important; }
         body:not(.top-nav) .sidebar ul.nav li.nav-item a.nav-link.active {
           color: #fff;
-          background: #304047; }
+          background-color: #27B645 }
           body:not(.top-nav) .sidebar ul.nav li.nav-item a.nav-link.active i {
             color: #20a8d8; }
         body:not(.top-nav) .sidebar ul.nav li.nav-item a.nav-link [class^="icon-"], body:not(.top-nav) .sidebar ul.nav li.nav-item a.nav-link [class*=" icon-"] {
@@ -5293,7 +5296,7 @@ nav.top-nav {
           background: #20a8d8; }
         nav.top-nav ul.nav li.nav-item a.nav-link.active {
           color: #fff;
-          background: #20a8d8; }
+          background-color: #27B645 }
       nav.top-nav ul.nav li.nav-item ul {
         position: absolute;
         top: 39px;
@@ -5676,12 +5679,12 @@ footer.footer {
     border-color: transparent; }
   .btn-transparent:active, .btn-transparent.active, .open > .btn-transparent.dropdown-toggle {
     color: #fff;
-    background-color: transparent;
+    background-color: #27B645;
     border-color: transparent;
     background-image: none; }
     .btn-transparent:active:hover, .btn-transparent:active:focus, .btn-transparent:active.focus, .btn-transparent.active:hover, .btn-transparent.active:focus, .btn-transparent.active.focus, .open > .btn-transparent.dropdown-toggle:hover, .open > .btn-transparent.dropdown-toggle:focus, .open > .btn-transparent.dropdown-toggle.focus {
       color: #fff;
-      background-color: transparent;
+      background-color: #27B645;
       border-color: transparent; }
   .btn-transparent.disabled:focus, .btn-transparent.disabled.focus, .btn-transparent:disabled:focus, .btn-transparent:disabled.focus {
     background-color: transparent;
@@ -6633,7 +6636,7 @@ hr.transparent {
     border: 0; }
     .breadcrumb-menu .btn.btn-secondary:hover, .breadcrumb-menu .btn.btn-secondary.active {
       color: #263238;
-      background: transparent; }
+      background-color: #27B645 }
   .breadcrumb-menu .open .btn.btn-secondary {
     color: #263238;
     background: transparent; }

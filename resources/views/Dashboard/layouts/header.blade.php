@@ -1,8 +1,8 @@
-<header class="navbar" style="background-color: #f4f4f4">
+<header class="navbar">
     <div class="container-fluid">
         <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">&#9776;</button>
-        <a class="navbar-brand" href="{{env('APP_URL')}}" style="display: flex; justify-content: center; align-items: center;background-color: #f4f4f4">
-            <img class="nav-logo-container" src="{{url('adminassets/img/coreui-logotyp.png')}}" width="100px" height="40px">
+        <a class="navbar-brand" href="{{env('APP_URL')}}" style="display: flex; justify-content: center; align-items: center;">
+            <img class="nav-logo-container" src="{{url('adminassets/img/logo.png')}}" width="54px" height="54px">
         </a> 
         <!--<a class="navbar-brand" href="{{env('APP_URL')}}"></a>-->
 
@@ -12,6 +12,9 @@
             </li>
             <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
+            </li>
+            <li class="nav-item p-x-1">
+                <a class="nav-link" href="{{route('categories')}}">Categories</a>
             </li>
             <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{route('users')}}">Users</a>

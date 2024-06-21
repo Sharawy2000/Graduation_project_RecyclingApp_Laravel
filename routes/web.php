@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Http;
+use App\Models\CategoryInfo;
 
 
 /*
@@ -21,10 +21,6 @@ use Illuminate\Support\Facades\Http;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,7 +56,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/', function () {
             $admin = auth()->guard('admin')->user();
-            $posts=Post::all();
+            $posts = Post::latest()->get();
             return view('Dashboard.index',['admin' => $admin,'posts'=>$posts]);
         })->name('dashboard');
 
@@ -78,27 +74,30 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('/waiting-list', function () {
             $admin = auth()->guard('admin')->user();
-            $posts=Post::all();
+            $posts = Post::latest()->get();
             return view('Dashboard.waitingList',['admin' => $admin,'posts'=>$posts]);
         })->name('waiting');
 
         Route::get('/rejected-list', function () {
             $admin = auth()->guard('admin')->user();
-            $posts=Post::all();
+            $posts = Post::latest()->get();
             return view('Dashboard.rejectedList',['admin' => $admin,'posts'=>$posts]);
         })->name('rejected');
+        
+        Route::get('/paid-list', function () {
+            $admin = auth()->guard('admin')->user();
+            $posts = Post::latest()->get();
+            return view('Dashboard.paidList',['admin' => $admin,'posts'=>$posts]);
+        })->name('paid');
+
+        Route::get('/categories', function () {
+            $admin = auth()->guard('admin')->user();
+            $categories = CategoryInfo::latest()->get();
+            return view('Dashboard.categories',['admin' => $admin,'categories'=>$categories]);
+        })->name('categories');
 
 
         //users actions
-
-        // profile
-
-        Route::get('/users/profile/{user}',function(User $user){
-            $admin = auth()->guard('admin')->user();
-            // $user = auth()->user();
-            $user_posts=$user->posts;
-            return view('users.profile',compact('user','admin','user_posts'));
-        })->name('users.profile');
 
         //Edit
         Route::get('/users/{user}/edit',function(User $user){
@@ -246,14 +245,62 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         
         })->name('posts.update');
         // ----------------------------------------------------------
+        Route::get('/categories/create', function () {
+            $admin = auth()->guard('admin')->user();
+            return view('categories.create',['admin' => $admin]);
+        })->name('categories.create');
+
+        Route::post('/categories/create/category', function(Request $request){
+        
+            $request->validate([
+                'name' => 'nullable|string|max:255',
+                'price' => 'nullable|numeric',
+            ]);
+            
+            CategoryInfo::create($request->all());
+        
+            return redirect()->back()->with('success', 'Category created successfully.');
+        
+        })->name('categories.store');
+
+        Route::get('/categories/{category}/edit', function(CategoryInfo $category){
+            $admin = auth()->guard('admin')->user();
+            return view('categories.edit',compact('category','admin'));
+
+        })->name('categories.edit');
+        
+        Route::put('/categories/{category}', function(Request $request, CategoryInfo $category){
+        
+            $request->validate([
+                'name' => 'nullable|string|max:255',
+                'price' => 'nullable|numeric',
+            ]);
+            
+            $column=['name','price'];
+        
+            CategoryInfo::where('id',$category->id)->update($request->only($column));
+        
+            return redirect()->back()->with('success', 'Category updated successfully.');
+        
+        })->name('categories.update');
+
+        Route::delete('categories/{category}/delete',function(CategoryInfo $category){
+            $category->delete();
+            return redirect()->back()->with('success', 'Category deleted successfully.');
+        })->name('category.delete');
 
     });
 });
 
 
 
+// Route::get('/login', function () {
+//     return view('test.login');
+// });
 
-
+// Route::get('/register',function(){
+//     return view('test.register');
+// });
 
 Route::get('/login', function () {
     return view('test.login');
@@ -268,9 +315,31 @@ Route::get('/reset',function(){
 })->name('reset');
 
 Route::get('/logout',[AdminController::class,'adminLogout'])->name('dashboard.logout');
+// Route::get('/login',function(){
+//     return view('test.login');
+// });
+// Route::get('/home',function(){
+//     return view('welcome');
+// })->name('home');
 
 // routes/web.php
 
+
+
+//Route::resource('posts', PostController::class);
+//Route::resource('reactions', ReactionController::class);
+//Route::resource('comments', ٍReviewController::class);
+
+
+//Route::get('/social-login/facebook/callback', function () {
+//    return Socialite::driver('facebook')->redirect();
+//});
+//
+//Route::get('/social-login/facebook/callback', function () {
+//    $user = Socialite::driver('facebook')->user();
+//
+//     $user->name;
+//});
 
 Route::get('/get/flask-access-token', function () {
     // URL of the Flask app endpoint
@@ -299,9 +368,9 @@ Route::get('/get/flask-access-token', function () {
 });
 
 
-// Route::get('/index',function(){
-//     return view('index');
-// });
+Route::get('/index',function(){
+    return view('index');
+});
 // Route::get('/profile', function () {
 //     return view('test.reset');
 // })->middleware("auth");
@@ -320,14 +389,5 @@ Route::group([
 
 
 });
-// create route to send notification
 
-Route::get('notifiy/access/token',function(){
-    return view('test.main');
-});
-
-
-
-
-
-
+    

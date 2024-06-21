@@ -42,9 +42,13 @@
             height: 100%;
         }
     }
+    .a:active{
+        background-color:red;
+    }
+   
 </style>
 
- <body class="navbar-fixed sidebar-nav fixed-nav" style="background-color: #27B645" >
+ <body class="navbar-fixed sidebar-nav fixed-nav" >
      @include("Dashboard.layouts.header")
      @include("Dashboard.layouts.sidebar")
      <!-- Main content -->

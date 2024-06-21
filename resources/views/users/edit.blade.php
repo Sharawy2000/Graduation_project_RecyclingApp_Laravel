@@ -22,12 +22,14 @@
     <label for="status">User Type</label>
     <select name="user_type" id="status" class="form-control" required>
         <option value="Seller" {{ $user->user_type === 'Seller' ? 'selected' : '' }}>Seller</option>
-        <option value="Buyer" {{ $user->user_type === 'Buyer' ? 'selected' : '' }}>Buyer</option>
+        <option value="Customer" {{ $user->user_type === 'Customer' ? 'selected' : '' }}>Customer</option>
         <option value="Guest" {{ $user->user_type === 'Guest' ? 'selected' : '' }}>Guest</option>
     </select>
 
-    <button type="submit">Edit</button>
-    <a style="text-decoration: none ; margin:10px" href="{{ route('users') }}">Back</a>
+    
+    <button style="background-color:#27B645" type="submit" class="btn btn-primary">Update</button>
+    
+    <a style="margin:5px" class="btn btn-primary" href="{{ route('users') }}"><strong>Back</strong></a>
 
     
 </form>

@@ -7,9 +7,6 @@
   <head>
     <meta charset="UTF-8">
     <title>  Log in </title>
-    <link rel = "icon" href = 
-        "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" 
-                type = "image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +23,7 @@
     height: 100vh;
     width: 100%;
     place-items: center;
-    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    background-color: #27B645;
     }
     ::selection{
     background: #ff80bf;
@@ -54,7 +51,7 @@
     left: 0px;
     bottom: 3px;
     border-radius: 5px;
-    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    background-color: #27B645;
     }
     .container form .input-box{
     width: 100%;
@@ -83,7 +80,7 @@
     position: absolute;
     height: 2px;
     width: 100%;
-    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    background-color: #27B645;
     left: 0;
     bottom: 0;
     transform: scaleX(0);
@@ -99,7 +96,7 @@
     margin: 40px 0 20px 0;
     }
     .container .input-box input[type="submit"]{
-    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    background-color: #27B645;
     font-size: 17px;
     color: #fff;
     border-radius: 5px;
@@ -108,7 +105,8 @@
     }
     .container .input-box input[type="submit"]:hover{
     letter-spacing: 1px;
-    background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
+    /*background: linear-gradient(to right, #a3ff00 0%, #42d50c 100%);*/
+    background-color: #27B645;
     }
     .container .option{
     font-size: 14px;

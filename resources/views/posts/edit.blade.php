@@ -54,8 +54,8 @@
         @enderror
     </div>
     <!-- Add other fields here -->
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a style="margin:20px" class="btn btn-primary" href="{{route('dashboard')}}"><strong>Back</strong></a>
+    <button style="background-color:#27B645" type="submit" class="btn btn-primary">Update</button>
+    <a style="margin:10px" class="btn btn-primary" href="{{route('dashboard')}}"><strong>Back</strong></a>
 </form>
 @endsection
 
